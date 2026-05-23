@@ -1,0 +1,91 @@
+/* ==========================================================================
+   1. Подключение шрифтов и базовые стили хедера
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+.header {
+    width: 100%;
+    background-color: #F3C3A4;
+    /* Персиковый фон из макета */
+    
+    top: 0;
+    z-index: 100;
+}
+
+.header__container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ==========================================================================
+   2. Логотип (Левая часть)
+   ========================================================================== */
+.header__logo img {
+    height: 40px;
+    object-fit: contain;
+    display: block;
+}
+
+/* ==========================================================================
+   3. Блок контактов (Центр / Сдвиг вправо)
+   ========================================================================== */
+.header__contact {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    /* Прижимает блок контактов и кнопку к правому краю */
+    margin-right: 38px;
+    /* Фиксированный зазор 38px ровно до кнопки */
+}
+
+.header__phone-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header__phone-icon {
+    color: #002C47;
+    flex-shrink: 0;
+}
+
+.header__phone {
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+    color: #002C47;
+    font-weight: 600;
+    font-size: 15px;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.header__phone:hover {
+    color: #7A919F;
+}
+
+/* ==========================================================================
+   4. Кнопка "Buyurtma berish" (Крайняя правая часть)
+   ========================================================================== */
+.header__btn-item {
+    background-color: #ffffff;
+    color: #002C47;
+    border: 2px solid #002C47;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.header__btn-item:hover {
+    background-color: #002C47;
+    color: #ffffff;
+}

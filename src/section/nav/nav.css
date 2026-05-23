@@ -1,0 +1,31 @@
+.menu-nav {
+    background-color: #F3C3A4;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.menu-list {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    gap: 25px;
+    list-style: none;
+}
+
+.menu-link {
+    text-decoration: none;
+    color: #4A4A4A;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.menu-link:hover {
+    color: #002C47;
+}

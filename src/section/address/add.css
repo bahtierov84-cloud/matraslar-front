@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ==========================================================================
+   Главный контейнер и сетка / Asosiy konteyner va setka
+   ========================================================================== */
+
+/* Общая секция / Umumiy sektsiya */
+.add {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 80px 0;
+}
+
+/* Ограничивающий контейнер / Cheklovchi konteyner */
+.add__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    box-sizing: border-box;
+}
+
+/* Текстовая колонка / Matn ustuni */
+.add__col-text {
+    flex: 1;
+}
+
+/* Медиа колонка (картинка) / Media ustuni (rasm) */
+.add__col-media {
+    flex: 1;
+}
+
+/* ==========================================================================
+   Типографика и тексты / Tipografika va matnlar
+   ========================================================================== */
+
+/* Главный заголовок / Asosiy sarlavha */
+.add__title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    color: #002C47;
+    margin: 0 0 35px 0;
+    line-height: 1.2;
+}
+
+/* Адрес / Manzil */
+.add__address {
+    font-family: 'Raleway', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #002C47;
+    margin: 0 0 15px 0;
+    line-height: 1.3;
+}
+
+/* Ориентир и описание / Moʻljal va tavsif */
+.add__landmark {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #708596;
+    margin: 0 0 35px 0;
+    max-width: 450px;
+}
+
+/* ==========================================================================
+   Кнопка действия / Harakat tugmasi
+   ========================================================================== */
+
+/* Кнопка геолокации / Geolokatsiya tugmasi */
+.add__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 35px;
+    border: 1.5px solid #002C47;
+    border-radius: 6px;
+    background-color: transparent;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #002C47;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Ховер эффект кнопки / Tugmaning hover (sichqoncha olib kelingandagi) effekti */
+.add__btn:hover {
+    background-color: #002C47;
+    color: #ffffff;
+}
+
+/* Иконка внутри кнопки / Tugma ichidagi ikonka */
+.add__icon {
+    transition: transform 0.2s ease;
+}
+
+/* Анимация иконки при ховере / Hover paytida ikonkaning harakatlanishi */
+.add__btn:hover .add__icon {
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Изображение и прогресс-бар / Rasm va progress-bar
+   ========================================================================== */
+
+/* Обертка для картинки / Rasm uchun konteyner */
+.add__img-wrapper {
+    width: 100%;
+    aspect-ratio: 625 / 380;
+    border-radius: 8px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Само изображение / Rasmning oʻzi */
+.add__img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* Линия-индикатор (прогресс-бар) / Indikator chizigʻi (progress-bar) */
+.add__progress-bar {
+    display: flex;
+    width: 100%;
+    height: 10px;
+    margin-top: 15px;
+    border: 1px solid #002C47;
+    box-sizing: border-box;
+}
+
+/* Сегменты индикатора / Indikator boʻlaklari */
+.add__progress-step {
+    flex: 1;
+    background-color: #ffffff;
+    border-right: 1px solid #002C47;
+    transition: background-color 0.3s ease;
+}
+
+/* Удаление правого бордера у последнего сегмента / Oxirgi boʻlakning oʻng chegarasini olib tashlash */
+.add__progress-step:last-child {
+    border-right: none;
+}
+
+/* Активный сегмент / Faol boʻlak */
+.add__progress-step--active {
+    background-color: #002C47;
+}
+
+/* ==========================================================================
+   Адаптивность (Медиа-запросы) / Adaptivlik (Media soʻrovlar)
+   ========================================================================== */
+
+/* Планшеты и мобильные устройства / Planshet va mobil qurilmalar */
+@media (max-width: 992px) {
+    .add {
+        padding: 60px 0;
+    }
+
+    .add__container {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .add__landmark {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .add__title {
+        font-size: 32px;
+        margin-bottom: 25px;
+    }
+
+    .add__address {
+        font-size: 22px;
+    }
+
+    .add__btn {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .add__progress-bar {
+        max-width: 625px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+.info {
+    width: 100%;
+    background-color: rgb(243, 195, 164); /* Фирменный бежевый фон */
+    padding: 60px 0;
+}
+
+.info__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    box-sizing: border-box;
+}
+
+/* Текстовая группа */
+.info__text-block {
+    flex: 1;
+}
+
+.info__title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: #002C47;
+    margin: 0 0 10px 0;
+}
+
+.info__subtitle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #002C47;
+    margin: 0;
+}
+
+/* Форма и инпуты */
+.info__form {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Обертка поля ввода */
+.info__input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid transparent; /* Заготовка под красивую рамку при hover/focus */
+    border-radius: 6px;
+    padding: 0 20px;
+    height: 54px;
+    width: 320px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* === HOVER & FOCUS ДЛЯ ИНПУТА === */
+.info__input-wrapper:hover {
+    border-color: #002C47; /* Проявление рамки при наведении на поле */
+}
+
+/* Эффект, когда пользователь кликнул внутрь инпута (активное состояние) */
+.info__input-wrapper:focus-within {
+    border-color: #002C47;
+    box-shadow: 0 0 0 3px rgba(0, 44, 71, 0.1); /* Мягкое свечение вокруг плашки */
+}
+
+/* Код страны с шрифтом Raleway */
+.info__country-code {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #002C47;
+    display: inline-block;
+    line-height: 1;
+}
+
+/* Разделительная черта */
+.info__divider {
+    color: #D6C3AB;
+    margin: 0 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    user-select: none;
+}
+
+/* Поле ввода номера */
+.info__input {
+    border: none;
+    outline: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    color: #002C47;
+    width: 100%;
+    background: transparent;
+}
+
+.info__input::placeholder {
+    color: #A0B1C0;
+}
+
+/* === КНОПКА ОТПРАВКИ И ЕЁ HOVER === */
+.info__btn {
+    height: 54px;
+    padding: 0 45px;
+    background-color: #002C47;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    white-space: nowrap;
+}
+
+.info__btn:hover {
+    background-color: #01384D; /* Плавная смена цвета на более глубокий */
+}
+
+.info__btn:active {
+    transform: scale(0.98); /* Легкий эффект нажатия при клике */
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .info {
+        padding: 50px 0;
+    }
+
+    .info__container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .info__form {
+        flex-direction: column;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .info__input-wrapper {
+        width: 100%;
+    }
+
+    .info__btn {
+        width: 100%;
+    }
+}
