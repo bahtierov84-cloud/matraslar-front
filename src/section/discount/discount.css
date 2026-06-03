@@ -85,7 +85,6 @@
 
 .discount-card__badge--sale {
     background-color: #1DD13B;
-    /* Зеленый цвет для бейджа AKSIYA */
 }
 
 .discount-card__right {
@@ -197,4 +196,21 @@
 .discount-card__btn:hover {
     background-color: #002C47;
     color: #ffffff;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .discount-card {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .discount-card__left {
+        flex: 0 0 100%;
+    }
+    
+    .discount-card__specs {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
 }

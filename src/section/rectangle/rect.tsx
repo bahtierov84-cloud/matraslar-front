@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './rect.css';
 import { aboutRowOne, aboutRowTwo } from '../../assets/data';
 
 const About: React.FC = () => {
+    // Состояние управления видео
+    const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    
+    // Вынесли ID видео в константу
+    const videoId = "ZmbBOiwj5_A";
+
     return (
-        <section className="about">
+        <section className="about" id="about">
             <div className="about__container container">
                 
-                {/* Первый ряд */}
+                {/* Первый ряд: Текст слева, Видео справа */}
                 <div className="about__row">
                     <div className="about__col-text">
                         <h2 className="about__title">{aboutRowOne.title}</h2>
@@ -20,19 +26,42 @@ const About: React.FC = () => {
                             </ul>
                         </div>
                     </div>
+                    
                     <div className="about__col-media">
                         <div className="about__video-wrapper">
-                            <img src={aboutRowOne.image} alt="Video Preview" className="about__img" />
-                            <button className="about__play-btn">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M8 5v14l11-7z" />
-                                </svg>
-                            </button>
+                            {isPlaying ? (
+                                <>
+                                    <iframe 
+                                        src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} 
+                                        allow="autoplay; encrypted-media" 
+                                        allowFullScreen 
+                                        title="About us video"
+                                    />
+                                    <button 
+                                        className="about__close-btn" 
+                                        onClick={() => setIsPlaying(false)}
+                                        aria-label="Закрыть видео"
+                                    >×</button>
+                                </>
+                            ) : (
+                                <>
+                                    <img src={aboutRowOne.image} alt="Video poster" className="about__img" />
+                                    <button 
+                                        className="about__play-btn" 
+                                        onClick={() => setIsPlaying(true)}
+                                        aria-label="Запустить видео"
+                                    >
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </button>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
 
-                {/* Второй ряд */}
+                {/* Второй ряд: Картинка слева, Текст справа */}
                 <div className="about__row about__row--reverse">
                     <div className="about__col-media">
                         <div className="about__image-wrapper">

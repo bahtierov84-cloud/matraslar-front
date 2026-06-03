@@ -1,49 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './add.css';
-import { addData } from '../../assets/data';
+import { addressesData } from '../../assets/data'; 
 
-const Add: React.FC = () => {
-    return (
-        <section className="add">
-            <div className="add__container container">
-                
-                {/* Левая сторона: Текстовый контент / Chap tomon: Matnli kontent */}
-                <div className="add__col-text">
-                    <h2 className="add__title">{addData.title}</h2>
-                    <h3 className="add__address">{addData.address}</h3>
-                    <p className="add__landmark">{addData.landmark}</p>
-                    
-                    <a 
-                        href={addData.locationUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="add__btn"
-                    >
-                        {/* Иконка маркера локации / Lokatsiya belgisi ikonkani */}
-                        <svg className="add__icon" width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 0C3.13 0 0 3.13 0 7C0 12.25 7 18 7 18C7 18 14 12.25 14 7C14 3.13 10.87 0 7 0ZM7 9.5C5.62 9.5 4.5 8.38 4.5 7C4.5 5.62 5.62 4.5 7 4.5C8.38 4.5 9.5 5.62 9.5 7C9.5 8.38 8.38 9.5 7 9.5Z" fill="currentColor"/>
-                        </svg>
-                        {addData.buttonText}
-                    </a>
-                </div>
+const AddressesSection: React.FC = () => {
+  // Aktiv profil indeksini saqlash uchun state (0 - birinchi filial)
+  const [activeStep, setActiveStep] = useState<number>(0);
 
-                {/* Правая сторона: Изображение и прогресс-бар / O'ng tomon: Rasm va progress-bar */}
-                <div className="add__col-media">
-                    <div className="add__img-wrapper">
-                        <img src={addData.image} alt="Location Map" className="add__img" />
-                    </div>
+  // Tanlangan filial ma'lumotlarini olish
+  const currentAddress = addressesData[activeStep];
 
-                    {/* Линия-индикатор (прогресс-бар) из CSS / CSS'dagi indikator chizig'i (progress-bar) */}
-                    <div className="add__progress-bar">
-                        <div className="add__progress-step add__progress-step--active"></div>
-                        <div className="add__progress-step"></div>
-                        <div className="add__progress-step"></div>
-                    </div>
-                </div>
+  return (
+    <section className="add">
+      <div className="add__container">
+        
+        {/* Chap ustun: Matnli ma'lumotlar va Tugma */}
+        <div className="add__col-text">
+          <h2 className="add__title">{currentAddress.title}</h2>
+          <h3 className="add__address">{currentAddress.address}</h3>
+          <p className="add__landmark">{currentAddress.landmark}</p>
+          
+          <a 
+            href={currentAddress.locationUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="add__btn"
+          >
+            <svg 
+              className="add__icon" 
+              width="18" 
+              height="18" 
+              viewBox="0 0 24 24" 
+              fill="currentColor"
+            >
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+            {currentAddress.buttonText}
+          </a>
+        </div>
 
-            </div>
-        </section>
-    );
+        {/* O'ng ustun: Rasm va Progress-bar (Indikatorlar) */}
+        <div className="add__col-media">
+          {/* Rasm konteyneri */}
+          <div className="add__img-wrapper">
+            <img 
+              src={currentAddress.image} 
+              alt={currentAddress.title} 
+              className="add__img" 
+            />
+          </div>
+
+          {/* Indikator chiziqlari (Progress-bar) */}
+          <div className="add__progress-bar">
+            {addressesData.map((_, index: number) => (
+              <div
+                key={index}
+                className={`add__progress-step ${
+                  index === activeStep ? 'add__progress-step--active' : ''
+                }`}
+                onClick={() => setActiveStep(index)}
+                style={{ cursor: 'pointer' }}
+                title={`${index + 1}-filialga o'tish`}
+              />
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
 };
 
-export default Add;
+export default AddressesSection;

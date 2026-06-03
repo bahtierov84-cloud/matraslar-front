@@ -78,14 +78,14 @@
     line-height: 1.6;
     color: #708596;
     margin: 0;
-    flex-grow: 1; /* Прижимает номер телефона к низу при разной высоте текста */
+    flex-grow: 1;
 }
 
 /* Ссылка на телефон во второй карточке */
 .adv__phone {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
     color: #002C47;
     text-decoration: underline;
     margin-top: 15px;
@@ -109,13 +109,13 @@
     }
 
     .adv__grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшетах */
+        grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
 }
 
 @media (max-width: 650px) {
     .adv__grid {
-        grid-template-columns: 1fr; /* 1 колонка на мобильных телефонах */
+        grid-template-columns: 1fr;
     }
 }

@@ -1,3 +1,6 @@
+/* ==========================================================================
+   СЕКЦИЯ СТАТИСТИКИ
+   ========================================================================== */
 .stats {
     width: 100%;
     background-color: #ffffff;
@@ -13,7 +16,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 40px; /* Увеличил gap для лучшего визуального разделения */
 }
 
 .stats__item {
@@ -25,6 +28,7 @@
 }
 
 .stats__value {
+    font-family: 'Raleway', sans-serif; /* Добавил шрифт для единообразия с остальным дизайном */
     font-size: 64px;
     font-weight: 800;
     color: #002C47;
@@ -34,8 +38,29 @@
 }
 
 .stats__label {
+    font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     color: #4A4A4A;
     font-weight: 500;
     margin: 0;
+    text-transform: uppercase; /* Добавил для акцента */
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   АДАПТИВНОСТЬ
+   ========================================================================== */
+@media (max-width: 768px) {
+    .stats__container {
+        flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+        gap: 40px 20px;
+    }
+
+    .stats__item {
+        flex: 1 1 40%; /* Элементы занимают по 40% ширины на мобильных */
+    }
+
+    .stats__value {
+        font-size: 48px; /* Немного уменьшил размер для маленьких экранов */
+    }
 }

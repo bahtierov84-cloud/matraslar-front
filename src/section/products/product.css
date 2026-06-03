@@ -1,17 +1,13 @@
-/* Общие стили секции */
+/* ==========================================================================
+   1. Общие стили секции
+   ========================================================================== */
 .product {
     width: 100%;
     background-color: #ffffff;
     padding: 60px 0;
 }
 
-.product__container {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
+
 
 .product__content {
     margin-bottom: 30px;
@@ -26,7 +22,9 @@
     margin: 0;
 }
 
-/* Стили меню категорий (Табов) */
+/* ==========================================================================
+   2. Стили меню категорий (Табов)
+   ========================================================================== */
 .categories__list {
     display: flex;
     align-items: center;
@@ -57,7 +55,6 @@
     transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-/* Общий эффект наведения плашки для всех категорий */
 .categories__item:hover {
     color: #002C47;
     background-color: #EAEFF2;
@@ -69,7 +66,9 @@
     background-color: #EAEFF2;
 }
 
-/* Стили списка и карточек товаров */
+/* ==========================================================================
+   3. Стили списка и карточек товаров
+   ========================================================================== */
 .products-list {
     width: 100%;
     display: flex;
@@ -126,12 +125,37 @@
     color: #ffffff;
 }
 
-.product-card__badge--new {
+.product-card__badge--new,
+.product-card__badge--yangi {
     background-color: #FF7272;
 }
 
-.product-card__badge--sale {
+.product-card__badge--sale,
+.product-card__badge--chegirma {
     background-color: #1DD13B;
+}
+
+.product-card__zoom-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #EAEFF2;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #002C47;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    z-index: 5;
+}
+
+.product-card__zoom-btn:hover {
+    background-color: #D1DCE2;
+    transform: scale(1.05);
 }
 
 .product-card__right {
@@ -212,14 +236,14 @@
 }
 
 .product-card__price-current {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
     font-size: 24px;
     font-weight: 800;
     color: #002C47;
 }
 
 .product-card__price-old {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
     font-size: 16px;
     color: #FF7272;
     text-decoration: line-through;
@@ -246,23 +270,161 @@
     color: #ffffff;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+/* ==========================================================================
+   4. Стили для Галереи (Локальное модальное окно лупы)
+   ========================================================================== */
+.product-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 44, 71, 0.3);
+    /* Исправлено: добавлен затемняющий фон, чтобы работал blur */
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    /* Выставили максимальный приоритет слоя */
+}
 
-/* Текущая (основная) цена */
-.product-card__price-current {
-    font-family: 'Raleway', sans-serif;
-    /* Добавлено */
-    font-size: 24px;
-    font-weight: 800;
+.product-modal__content {
+    background-color: #ffffff;
+    border: 1px solid #EBF1F4;
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 550px;
+    width: 90%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 20px 40px rgba(0, 44, 71, 0.15);
+}
+
+.product-modal__close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 34px;
+    line-height: 1;
+    color: #7A919F;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.product-modal__close:hover {
     color: #002C47;
 }
 
-/* Старая (зачеркнутая) цена */
-.product-card__price-old {
-    font-family: 'Raleway', sans-serif;
-    /* Добавлено */
-    font-size: 16px;
-    color: #FF7272;
-    text-decoration: line-through;
-    font-weight: 600;
+.product-modal__main-img-wrap {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    background-color: #ffffff;
+}
+
+.product-modal__main-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.product-modal__thumbnails {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.product-modal__thumb-item {
+    width: 80px;
+    height: 60px;
+    border: 2px solid #EBF1F4;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.product-modal__thumb-item:hover {
+    border-color: #A3B6C1;
+}
+
+.product-modal__thumb-item img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.product-modal__thumb-item--active {
+    border-color: #002C47;
+    transform: scale(1.02);
+}
+
+/* ... Предыдущие стили без изменений ... */
+
+/* Улучшение: Защита flex-контейнера от растягивания */
+.product-card__right {
+    flex: 1;
+    min-width: 0;
+    /* ОЧЕНЬ ВАЖНО: предотвращает выход текста за пределы */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* ==========================================================================
+   АДАПТИВНОСТЬ (Дополнения)
+   ========================================================================== */
+@media (max-width: 992px) {
+    .product-card {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .product-card__left {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-card {
+        padding: 20px;
+    }
+
+    .product-card__title {
+        font-size: 22px;
+    }
+
+    .product-card__specs {
+        gap: 20px;
+    }
+}
+
+/* ==========================================================================
+   Микро-оптимизации UX
+   ========================================================================== */
+.categories__item,
+.product-card__btn,
+.product-modal__close {
+    user-select: none;
+    /* Текст не будет выделяться при случайных двойных кликах */
+}
+
+/* Плавный скролл для мобильных табов */
+.categories__list {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 }

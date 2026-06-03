@@ -2,7 +2,7 @@
 
 .info {
     width: 100%;
-    background-color: rgb(243, 195, 164); /* Фирменный бежевый фон */
+    background-color: #EABF9F;
     padding: 60px 0;
 }
 
@@ -17,7 +17,12 @@
     box-sizing: border-box;
 }
 
-/* Текстовая группа */
+/* Изменение выравнивания контейнера, когда показывается только окно успеха */
+.info__container:has(.info__success-block) {
+    justify-content: center;
+}
+
+/* Текстовая группа первого окна */
 .info__text-block {
     flex: 1;
 }
@@ -49,7 +54,7 @@
     display: flex;
     align-items: center;
     background-color: #ffffff;
-    border: 1px solid transparent; /* Заготовка под красивую рамку при hover/focus */
+    border: 1px solid transparent;
     border-radius: 6px;
     padding: 0 20px;
     height: 54px;
@@ -58,18 +63,16 @@
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* === HOVER & FOCUS ДЛЯ ИНПУТА === */
 .info__input-wrapper:hover {
-    border-color: #002C47; /* Проявление рамки при наведении на поле */
+    border-color: #002C47;
 }
 
-/* Эффект, когда пользователь кликнул внутрь инпута (активное состояние) */
 .info__input-wrapper:focus-within {
     border-color: #002C47;
-    box-shadow: 0 0 0 3px rgba(0, 44, 71, 0.1); /* Мягкое свечение вокруг плашки */
+    box-shadow: 0 0 0 3px rgba(0, 44, 71, 0.1);
 }
 
-/* Код страны с шрифтом Raleway */
+/* Код страны */
 .info__country-code {
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
@@ -92,18 +95,15 @@
 .info__input {
     border: none;
     outline: none;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
     color: #002C47;
     width: 100%;
     background: transparent;
 }
 
-.info__input::placeholder {
-    color: #A0B1C0;
-}
-
-/* === КНОПКА ОТПРАВКИ И ЕЁ HOVER === */
+/* Кнопка отправки */
 .info__btn {
     height: 54px;
     padding: 0 45px;
@@ -120,11 +120,40 @@
 }
 
 .info__btn:hover {
-    background-color: #01384D; /* Плавная смена цвета на более глубокий */
+    color: #002C47;
+    background-color: #ffffff;
 }
 
 .info__btn:active {
-    transform: scale(0.98); /* Легкий эффект нажатия при клике */
+    transform: scale(0.98);
+}
+
+/* БЛОК УСПЕШНОЙ ОТПРАВКИ */
+.info__success-block {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 54px;
+    box-sizing: border-box;
+}
+
+.info__success-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: #002C47;
+    margin: 0 0 6px 0;
+    line-height: 1.2;
+}
+
+.info__success-subtitle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    color: #002C47;
+    margin: 0;
 }
 
 /* Адаптивность */
@@ -151,5 +180,14 @@
 
     .info__btn {
         width: 100%;
+    }
+
+    .info__success-block {
+        height: auto;
+        min-height: 54px;
+    }
+
+    .info__success-title {
+        font-size: 26px;
     }
 }

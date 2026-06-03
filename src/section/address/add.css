@@ -27,9 +27,12 @@
     flex: 1;
 }
 
-/* Медиа колонка (картинка) / Media ustuni (rasm) */
+/* Медиа колонка (картинка и прогресс) / Media ustuni */
 .add__col-media {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 /* ==========================================================================
@@ -89,7 +92,7 @@
     transition: all 0.2s ease;
 }
 
-/* Ховер эффект кнопки / Tugmaning hover (sichqoncha olib kelingandagi) effekti */
+/* Ховер эффект кнопки / Tugmaning hover effekti */
 .add__btn:hover {
     background-color: #002C47;
     color: #ffffff;
@@ -113,7 +116,7 @@
 .add__img-wrapper {
     width: 100%;
     aspect-ratio: 625 / 380;
-    border-radius: 8px;
+    border-radius: 6px;
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -130,9 +133,10 @@
 .add__progress-bar {
     display: flex;
     width: 100%;
-    height: 10px;
-    margin-top: 15px;
+    height: 8px;
+    border-radius: 100px;
     border: 1px solid #002C47;
+    overflow: hidden;
     box-sizing: border-box;
 }
 
@@ -140,13 +144,7 @@
 .add__progress-step {
     flex: 1;
     background-color: #ffffff;
-    border-right: 1px solid #002C47;
     transition: background-color 0.3s ease;
-}
-
-/* Удаление правого бордера у последнего сегмента / Oxirgi boʻlakning oʻng chegarasini olib tashlash */
-.add__progress-step:last-child {
-    border-right: none;
 }
 
 /* Активный сегмент / Faol boʻlak */
@@ -189,7 +187,8 @@
         max-width: 280px;
     }
 
-    .add__progress-bar {
+    .add__col-media {
+        width: 100%;
         max-width: 625px;
         margin-left: auto;
         margin-right: auto;

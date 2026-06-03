@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./stats.css";
 import { statsData } from "../../assets/data";
 
@@ -7,17 +7,35 @@ interface AnimatedCounterProps {
     duration?: number;
 }
 
-const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
-    target,
-    duration = 2000,
-}) => {
+const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ target, duration = 2000 }) => {
     const [count, setCount] = useState(0);
+    const [isVisible, setIsVisible] = useState(false);
+    const ref = useRef<HTMLSpanElement>(null);
+    
     const hasPlus = target.includes("+");
     const hasK = target.toLowerCase().includes("k");
-
     const numericTarget = parseInt(target.replace(/[^\d]/g, ""), 10);
 
+    // Intersection Observer для запуска анимации при скролле
     useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (ref.current) observer.observe(ref.current);
+        return () => observer.disconnect();
+    }, []);
+
+    // Сама анимация счета
+    useEffect(() => {
+        if (!isVisible) return;
+
         let startTarget = 0;
         const totalSteps = 60;
         const stepTime = Math.floor(duration / totalSteps);
@@ -33,14 +51,14 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
         }, stepTime);
 
         return () => clearInterval(timer);
-    }, [numericTarget, duration]);
+    }, [isVisible, numericTarget, duration]);
 
     return (
-        <>
+        <span ref={ref}>
             {count}
             {hasK && "k"}
             {hasPlus && "+"}
-        </>
+        </span>
     );
 };
 

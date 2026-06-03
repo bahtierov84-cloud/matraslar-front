@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
     };
 
     return (
-        <footer className="footer">
+        <footer className="footer" id="contact">
             <div className="footer__container container">
                 
                 {/* Верхняя строка: Навигация и Соцсети */}

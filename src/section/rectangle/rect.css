@@ -13,126 +13,43 @@
     display: flex;
     flex-direction: column;
     gap: 80px;
-    /* Отступ между рядами */
     box-sizing: border-box;
 }
 
-/* Сетка Flexbox */
 .about__row {
     display: flex;
     align-items: center;
     gap: 60px;
 }
 
-/* На десктопе оба ряда сохраняют естественный порядок: 
-   Ряд 1: Текст (1) + Медиа (2) -> Текст слева
-   Ряд 2: Медиа (1) + Текст (2) -> Медиа слева */
-.about__row--reverse {
-    flex-direction: row;
-}
+/* Второй ряд переворачиваем: картинка слева, текст справа */
 
-.about__col-text {
-    flex: 1;
-}
 
+.about__col-text,
 .about__col-media {
     flex: 1;
 }
 
-/* Стили заголовков и текста */
-.about__title {
-    font-family: 'Raleway', sans-serif;
-    font-size: 38px;
-    font-weight: 800;
-    color: #002C47;
-    margin: 0 0 25px 0;
-    line-height: 1.2;
-}
-
-.about__lead,
-.about__footer-text {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
-    color: #002C47;
-    margin: 0 0 25px 0;
-}
-
-.about__footer-text {
-    margin-top: 25px;
-    margin-bottom: 0;
-}
-
-/* Бежевые информационные карточки-боксы */
-.about__card-box {
-    background-color: #F1E5D5;
-    /* Мягкий бежевый тон из макета */
-    border: 1px solid #D6C3AB;
-    border-radius: 10px;
-    padding: 25px 30px;
-}
-
-/* Маркированный список (Первый блок) */
-.about__list {
-    margin: 0;
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.about__list li {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    color: #333333;
-    line-height: 1.5;
-}
-
-/* Нумерованный список (Второй блок) */
-.about__ordered-list {
-    margin: 0;
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.about__ordered-list li {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    /* Делает цифры списка жирными */
-    color: #002C47;
-}
-
-.about__ordered-list li span {
-    font-weight: 400;
-    /* Сбрасывает жирность для самого текста */
-    color: #333333;
-    margin-left: 5px;
-}
-
-/* Стили оберток для медиа */
-.about__video-wrapper,
-.about__image-wrapper {
+/* Оптимизированный видео-враппер */
+.about__video-wrapper {
     position: relative;
     width: 100%;
-    aspect-ratio: 625 / 401;
-    /* Фиксирует пропорции картинок как на макете */
+    aspect-ratio: 16 / 9;
+    /* Стабильные пропорции */
     border-radius: 12px;
     overflow: hidden;
-
-    box-sizing: border-box;
+    background-color: #000000;
 }
 
-.about__img {
+.about__video-wrapper iframe,
+.about__video-wrapper .about__img {
     width: 100%;
     height: 100%;
-    display: block;
     object-fit: cover;
+    display: block;
 }
 
-/* Кнопка Play по центру видео */
+/* Кнопка Play */
 .about__play-btn {
     position: absolute;
     top: 50%;
@@ -149,21 +66,129 @@
     justify-content: center;
     cursor: pointer;
     box-shadow: 0 4px 20px rgba(0, 44, 71, 0.4);
-    transition: all 0.2s ease;
     z-index: 2;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .about__play-btn svg {
     margin-left: 4px;
-    /* Смещение иконки для идеального оптического центра */
+    /* Оптическое центрирование иконки плеера */
 }
 
 .about__play-btn:hover {
-    background-color: #01384D;
-    transform: translate(-50%, -50%) scale(1.08);
+    background-color: #001F33;
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
-/* Адаптивность для планшетов и мобильных устройств */
+/* Новые стили для кнопки Закрыть инлайн-видео */
+.about__close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.2s;
+    line-height: 1;
+}
+
+.about__close-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* Стили для картинок во втором ряду */
+.about__image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 625 / 401;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.about__image-wrapper .about__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Стили для заголовков */
+.about h1,
+.about__title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 44px;
+    font-weight: 900;
+    color: #002C47;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+/* Стили для текста */
+.about p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #4A4A4A;
+    margin: 0 0 20px 0;
+}
+
+/* Списки */
+.about__list,
+.about__ordered-list {
+    margin: 0 0 20px 0;
+    padding-left: 20px;
+    background-color: #EABF9F;
+    border-radius: 10px;
+    padding: 27px 30px 28px;
+    border: 2px solid #01384D;
+}
+
+.about__list li {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4A4A4A;
+
+    margin-bottom: 12px;
+    position: relative;
+    list-style-type: disc;
+}
+
+.about__ordered-list {
+    list-style-type: decimal;
+    /* Включает стандартную нумерацию */
+}
+
+.about__ordered-list li {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #002C47;
+    /* Цвет для маркеров-цифр */
+    font-weight: 700;
+    /* Жирные цифры */
+    margin-bottom: 12px;
+}
+
+.about__ordered-list li span {
+    color: #4A4A4A;
+    font-weight: 400;
+    /* Обычный вес для текста внутри пункта */
+}
+
+/* ==========================================================================
+   Адаптивность под планшеты и мобильные устройства
+   ========================================================================== */
 @media (max-width: 992px) {
     .about {
         padding: 60px 0;
@@ -173,45 +198,14 @@
         gap: 50px;
     }
 
-    /* Первый ряд: Текст становится сверху, видео снизу */
-    .about__row {
-        flex-direction: column;
-        gap: 35px;
-    }
-
-    /* Второй ряд: Используем column-reverse, чтобы текст из конца HTML-кода 
-       поднялся НАВЕРХ, а картинка послушно ушла вниз */
+    .about__row,
     .about__row--reverse {
-        flex-direction: column-reverse;
+        flex-direction: column;
+        gap: 30px;
     }
 
+    .about h1,
     .about__title {
-        font-size: 30px;
-        text-align: center;
+        font-size: 32px;
     }
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-
-/* ... остальные стили секции adv ... */
-
-/* Ссылка на телефон во второй карточке */
-.adv__phone {
-    font-family: 'Raleway', sans-serif!important;
-    /* Подключаем нужный шрифт */
-    font-size: 15px;
-    font-weight: 700;
-    /* Делаем его жирным */
-    color: #002C47;
-    /* Фирменный темно-синий цвет */
-    text-decoration: underline;
-    /* Сплошное подчеркивание как на макете */
-    margin-top: 15px;
-    display: inline-block;
-    transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-.adv__phone:hover {
-    color: #01384D;
-    /* Слегка меняем цвет при наведении */
 }

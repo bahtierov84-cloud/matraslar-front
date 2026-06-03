@@ -26,7 +26,7 @@
 /* Сетка на 3 колонки */
 .tech__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Исправлено с 13fr на стандартный 1fr */
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
 
@@ -45,16 +45,17 @@
     margin: 0 0 20px 0;
 }
 
-/* Контейнер картинки и кнопки с интегрированным темным бордюром */
+/* Контейнер картинки и видео */
 .tech-card__video-wrapper {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 11; /* Соотношение сторон как на макете */
+    aspect-ratio: 16 / 11;
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 20px;
-    border: 3px solid #01384D; /* Заменили серый бордер на ваш жирный #01384D */
-    box-sizing: border-box; /* Чтобы бордюр не раздувал обертку карточки */
+    border: 3px solid #01384D;
+    box-sizing: border-box;
+    background-color: #000000;
 }
 
 .tech-card__img {
@@ -82,16 +83,16 @@
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0, 44, 71, 0.3);
     transition: transform 0.2s ease, background-color 0.2s ease;
+    z-index: 2;
 }
 
-/* Смещение иконки треугольника чуть-чуть вправо для оптического центра */
 .tech-card__play-btn svg {
     margin-left: 2px;
 }
 
 .tech-card__play-btn:hover {
     background-color: #001F33;
-    transform: translate(-50%, -50%) scale(1.1); /* Эффект увеличения при наведении */
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
 .tech-card__desc {
@@ -103,7 +104,45 @@
     max-width: 340px;
 }
 
-/* Адаптив под планшеты и мобилки */
+/* Кнопка закрытия видео */
+.tech-card__close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    background-color: rgba(0, 44, 71, 0.85);
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    line-height: 1;
+}
+
+.tech-card__close-btn:hover {
+    background-color: #001F33;
+    transform: scale(1.1);
+}
+
+/* Стили для iframe */
+.tech-card__video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    z-index: 1;
+}
+
+/* Адаптив */
 @media (max-width: 992px) {
     .tech__grid {
         grid-template-columns: repeat(2, 1fr);
@@ -114,5 +153,10 @@
     .tech__grid {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+    
+    .tech__title {
+        font-size: 28px;
+        margin-bottom: 35px;
     }
 }

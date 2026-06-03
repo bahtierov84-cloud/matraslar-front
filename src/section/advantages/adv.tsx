@@ -18,7 +18,10 @@ const Adv: React.FC = () => {
                                 <h3 className="adv__title">{card.title}</h3>
                                 <p className="adv__desc">{card.desc}</p>
                                 {card.phone && (
-                                    <a href={`tel:${card.phone.replace(/\s+/g, '')}`} className="adv__phone">
+                                    <a 
+                                        href={`tel:${card.phone.replace(/[\s-]/g, '')}`} 
+                                        className="adv__phone"
+                                    >
                                         {card.phone}
                                     </a>
                                 )}

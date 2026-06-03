@@ -1,10 +1,51 @@
-import React from 'react';  
+import React, { useState } from 'react'; 
+import { Logo, TelNumber } from '../../assets/data'; 
+import OrderModal from '../modal/OrderModal'; 
 import './header.css';
-import Logo from '../../img/logo.png';  
-// Импортируем только номер телефона из вашего файла data.ts
-import { TelNumber } from '../../assets/data';   
 
 const Header: React.FC = () => {
+    // Состояния для управления модальным окном заказа
+    const [isOrderModalOpen, setIsOrderModalOpen] = useState<boolean>(false);
+    const [isOrderSuccess, setIsOrderSuccess] = useState<boolean>(false);
+    const [quantity, setQuantity] = useState<number>(1);
+    const [selectedCategory, setSelectedCategory] = useState<string>("");
+    const [customerName, setCustomerName] = useState<string>("");
+    const [customerPhone, setCustomerPhone] = useState<string>("");
+
+    const openOrderModal = () => {
+        setIsOrderModalOpen(true);
+    };
+
+    const closeOrderModal = () => {
+        setIsOrderModalOpen(false);
+        setIsOrderSuccess(false);
+        setQuantity(1);
+        setSelectedCategory("");
+        setCustomerName("");
+        setCustomerPhone("");
+    };
+
+    const handleIncrement = () => setQuantity((prev) => prev + 1);
+    const handleDecrement = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
+    const handleOrderSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        
+        // Базовая валидация имени
+        if (customerName.trim().length < 2) {
+            return; 
+        }
+        
+        console.log("Muvaffaqiyatli umumiy buyurtma (Header):", {
+            customerName,
+            customerPhone: `+998 ${customerPhone}`,
+            chosenCategory: selectedCategory,
+            quantity: quantity,
+            productTitle: "Umumiy konsultatsiya",
+        });
+        setIsOrderSuccess(true); 
+    };
+
     return (
         <header className='header'>
             <div className='header__container container'>
@@ -14,10 +55,10 @@ const Header: React.FC = () => {
                     <img src={Logo} alt='logo' />
                 </div>
 
-                {/* Блок контактов со значком телефона */}
+                {/* Блок контактов */}
                 <div className='header__contact'>
-                    {TelNumber.map((item) => (
-                        <div key={item.id} className="header__phone-wrapper">
+                    {TelNumber.map((item, index) => (
+                        <div key={item.id || index} className="header__phone-wrapper">
                             <svg 
                                 className="header__phone-icon" 
                                 width="18" 
@@ -40,10 +81,33 @@ const Header: React.FC = () => {
 
                 {/* Кнопка заказа */}
                 <div className="header__btn">
-                    <button className='header__btn-item'>Buyurtma berish</button>
+                    <button 
+                        className='header__btn-item' 
+                        type='button' 
+                        onClick={openOrderModal}
+                    >
+                        Buyurtma berish
+                    </button>
                 </div>
 
             </div>
+
+            {/* Модальное окно заказа */}
+            <OrderModal 
+                isOpen={isOrderModalOpen}
+                isSuccess={isOrderSuccess}
+                onClose={closeOrderModal}
+                onSubmit={handleOrderSubmit}
+                customerName={customerName}
+                setCustomerName={setCustomerName}
+                customerPhone={customerPhone}
+                setCustomerPhone={setCustomerPhone}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+                quantity={quantity}
+                onIncrement={handleIncrement}
+                onDecrement={handleDecrement}
+            />
         </header>
     );
 };

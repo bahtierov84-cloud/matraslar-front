@@ -1,6 +1,8 @@
 // ==========================================================================
 // 1. ИМПОРТЫ ИЗОБРАЖЕНИЙ / RASMLAR IMPORTI
 // ==========================================================================
+import LogoImg from "./img/logo.png";
+import MatrasImg from "./img/matras.png";
 import disMatrasImg from "./img/dismatras.png";
 import redMatrasImg from "./img/redmatras.png";
 import tech1Img from "./img/ing_1.png";
@@ -12,6 +14,23 @@ import advImg1 from "./img/adv.png";
 import advImg2 from "./img/adv2.png";
 import advImg3 from "./img/adv3.png";
 import addImg from "./img/add.png";
+import addImg2 from "./img/add_img2.jpeg";
+import addImg3 from "./img/add_img3.jpeg";
+import group3660Img from "./img/Group 3660.png";
+import modal1 from "../img/modal1.png";
+import modal2 from "../img/modal2.png";
+import slide1Img from "../img/intro__img.png";
+import slide2Img from "./img/bed2.png";
+import slide3Img from "./img/bed3.png";
+
+// Галерея изображений для модального окна
+export const modalGalleryImages = [
+    modal1,
+    modal2,
+    tech1Img,
+    tech2Img,
+    tech3Img,
+];
 
 // ==========================================================================
 // 2. ИНТЕРФЕЙСЫ И ТИПЫ ДАННЫХ / INTERFEYSLAR VA MA'LUMOT TURLARI
@@ -21,6 +40,8 @@ export interface MenuItem {
     title: string;
     link: string;
 }
+
+export const Logo = LogoImg;
 
 export interface TelItem {
     id: number;
@@ -45,6 +66,7 @@ export interface ProductCharacteristic {
 
 export interface ProductItem {
     id: number;
+    categoryId?: number;
     title: string;
     image: string;
     badges: { text: string; type: "new" | "sale" }[];
@@ -60,12 +82,14 @@ export interface TechItem {
     title: string;
     image: string;
     description: string;
+    videoUrl?: string;
 }
 
 export interface AboutRowOneItem {
     title: string;
     description: string;
     image: string;
+    video?: string;
     features: string[];
 }
 
@@ -84,18 +108,17 @@ export interface AdvCardItem {
     phone?: string;
 }
 
-export interface AddDataItem {
+export interface SingleAddressItem {
+    id: number;
     title: string;
     address: string;
     landmark: string;
     buttonText: string;
     image: string;
     locationUrl: string;
-    progressSteps: number[];
-    activeStep: number;
 }
 
-export interface InfoDataItem {
+export interface InfoData {
     title: string;
     subtitle: string;
     countryCode: string;
@@ -113,28 +136,75 @@ export interface FooterSocialItem {
     url: string;
 }
 
-export interface FooterDataItem {
+export interface FooterData {
     links: FooterLinkItem[];
     socials: FooterSocialItem[];
     copyright: string;
 }
 
+export interface OrderModalData {
+    title: string;
+    namePlaceholder: string;
+    phonePrefix: string;
+    phonePlaceholder: string;
+    categoryLabel: string;
+    quantityLabel: string;
+    submitButtonText: string;
+}
+
+export interface SuccessModalData {
+    title: string;
+    image: string;
+    description: string;
+    closeButtonText: string;
+}
+
+export interface Slide {
+    id: number;
+    title: string;
+    image: string;
+    alt: string;
+    buttonUrl: string;
+}
+
 // ==========================================================================
-// 3. ЭКСПОРТ ТИПИЗИРОВАННЫХ ДАННЫХ / TIPLASHGAN MA'LUMOTLAR EKSPORTI
+// 3. ЭКСПОРТ ТИПИЗИРОВАННЫХ ДАННЫХ / MA'LUMOTLAR EKSPORTI
 // ==========================================================================
 
-// --- Навигация и Контакты (Header) / Navigatsiya va Kontaktlar (Header) ---
 export const menuItems: MenuItem[] = [
-    { id: 1, title: "Katalog", link: "/katalog" },
-    { id: 2, title: "Aksiya", link: "/aksiya" },
-    { id: 3, title: "Biz haqimizda", link: "/about" },
-    { id: 4, title: "Manzilimiz", link: "/location" },
-    { id: 5, title: "Aloqa", link: "/contact" },
+    { id: 1, title: "Katalog", link: "#products" },
+    { id: 2, title: "Aksiya", link: "#discount" },
+    { id: 3, title: "Biz haqimizda", link: "#about" },
+    { id: 4, title: "Manzilimiz", link: "#location" },
+    { id: 5, title: "Aloqa", link: "#contact" },
 ];
 
 export const TelNumber: TelItem[] = [{ id: 1, number: "+998 90 123 45 67" }];
 
-// --- Блок статистики / Statistika bloki ---
+export const slidesData: Slide[] = [
+    {
+        id: 1,
+        title: "Kechalari sokin <br />dam oling",
+        image: slide1Img,
+        alt: "Kechalari sokin dam oling",
+        buttonUrl: "#categories",
+    },
+    {
+        id: 2,
+        title: "Maksimal darajada <br />qulaylik",
+        image: slide2Img,
+        alt: "Maksimal darajada qulaylik",
+        buttonUrl: "#categories",
+    },
+    {
+        id: 3,
+        title: "Sifatli mebel <br />sizning uyingizga",
+        image: slide3Img,
+        alt: "Sifatli mebel sizning uyingizga",
+        buttonUrl: "#categories",
+    },
+];
+
 export const statsData: StatItem[] = [
     { id: 1, value: "7", label: "yillik tajriba" },
     { id: 2, value: "10k+", label: "mamnun mijozlar" },
@@ -142,7 +212,6 @@ export const statsData: StatItem[] = [
     { id: 4, value: "3", label: "kunda yetkazish" },
 ];
 
-// --- Категории каталога / Katalog kategoriyalari ---
 export const categoriesData: CategoryItem[] = [
     { id: 1, name: "Barchasi" },
     { id: 2, name: "Model A+" },
@@ -155,12 +224,12 @@ export const categoriesData: CategoryItem[] = [
     { id: 9, name: "Model A" },
 ];
 
-// --- Товары каталога / Katalog mahsulotlari ---
 export const productsData: ProductItem[] = [
     {
         id: 1,
-        title: "Ortopedik Eko matras",
-        image: disMatrasImg,
+        categoryId: 2,
+        title: "Ortopedik Eko matras (Model A+)",
+        image: MatrasImg,
         badges: [{ text: "YANGI MAHSULOT", type: "new" }],
         characteristics: [
             { label: "Yuklama", value: "150 kg" },
@@ -169,13 +238,14 @@ export const productsData: ProductItem[] = [
             { label: "Sig'imi", value: "2 kishilik" },
         ],
         description:
-            "Penatibvs viverra gravida rhoncvs in. At tvrpis morbi ante tortor a est. Habitant adipiscing vt sed pvlvinvar tellvs, vt vrna, fermentvm. Porttitor senectvs lorem rhoncvs facilisi ac dictvm varivs egestas.",
+            "Penatibvs viverra gravida rhoncvs in. At tvrpis morbi ante tortor a est.",
         price: "1 699 999 so'm",
     },
     {
         id: 2,
-        title: "Ortopedik Eko matras",
-        image: disMatrasImg,
+        categoryId: 3,
+        title: "Ortopedik Eko matras (Model B+)",
+        image: MatrasImg,
         badges: [{ text: "YANGI MAHSULOT", type: "new" }],
         characteristics: [
             { label: "Yuklama", value: "150 kg" },
@@ -184,13 +254,14 @@ export const productsData: ProductItem[] = [
             { label: "Sig'imi", value: "2 kishilik" },
         ],
         description:
-            "Penatibvs viverra gravida rhoncvs in. At tvrpis morbi ante tortor a est. Habitant adipiscing vt sed pvlvinvar tellvs, vt vrna, fermentvm. Porttitor senectvs lorem rhoncvs facilisi ac dictvm varivs egestas.",
+            "Penatibvs viverra gravida rhoncvs in. At tvrpis morbi ante tortor a est.",
         price: "1 699 999 so'm",
     },
     {
         id: 3,
-        title: "Ortopedik Eko matras",
-        image: disMatrasImg,
+        categoryId: 8,
+        title: "Ortopedik Eko matras (Yangi)",
+        image: MatrasImg,
         badges: [{ text: "YANGI MAHSULOT", type: "new" }],
         characteristics: [
             { label: "Yuklama", value: "150 kg" },
@@ -199,16 +270,16 @@ export const productsData: ProductItem[] = [
             { label: "Sig'imi", value: "2 kishilik" },
         ],
         description:
-            "Penatibvs viverra gravida rhoncvs in. At tvrpis morbi ante tortor a est. Habitant adipiscing vt sed pvlvinvar tellvs, vt vrna, fermentvm. Porttitor senectvs lorem rhoncvs facilisi ac dictvm varivs egestas.",
+            "Penatibvs viverra gravida rhoncvs in. At tvrpis morbi ante tortor a est.",
         price: "1 699 999 so'm",
     },
 ];
 
-// --- Акционные товары / Aksiyadagi mahsulotlar ---
 export const discountProductsData: ProductItem[] = [
     {
         id: 4,
-        title: "Ortopedik Eko matras",
+        categoryId: 4,
+        title: "Ortopedik Eko matras (Aksiya)",
         image: disMatrasImg,
         badges: [{ text: "AKSIYA", type: "sale" }],
         characteristics: [
@@ -218,13 +289,14 @@ export const discountProductsData: ProductItem[] = [
             { label: "Sig'imi", value: "2 kishilik" },
         ],
         description:
-            "Penatibvs viverra gravida rhoncvs in. At tvrpis morbi ante tortor a est. Habitant adipiscing vt sed pvlvinvar tellvs, vt vrna, fermentvm. Porttitor senectvs lorem rhoncvs facilisi ac dictvm varivs egestas.",
+            "Penatibvs viverra gravida rhoncvs in. At tvrpis morbi ante tortor a est.",
         price: "1 299 999 so'm",
         oldPrice: "1 599 999 so'm",
         isDiscount: true,
     },
     {
         id: 5,
+        categoryId: 9,
         title: "Lux Soft Memory",
         image: redMatrasImg,
         badges: [{ text: "AKSIYA", type: "sale" }],
@@ -235,44 +307,46 @@ export const discountProductsData: ProductItem[] = [
             { label: "Sig'imi", value: "3 kishilik" },
         ],
         description:
-            "Penatibvs viverra gravida rhoncvs in. At tvrpis morbi ante tortor a est. Habitant adipiscing vt sed pvlvinvar tellvs, vt vrna, fermentvm. Porttitor senectvs lorem rhoncvs facilisi ac dictvm varivs egestas.",
+            "Penatibvs viverra gravida rhoncvs in. At tvrpis morbi ante tortor a est.",
         price: "1 199 999 so'm",
         oldPrice: "3 000 000 so'm",
         isDiscount: true,
     },
 ];
 
-// --- Блок Технологий / Texnologiyalar bloki ---
 export const techData: TechItem[] = [
     {
         id: 1,
         title: "Memoriform",
         image: tech1Img,
         description:
-            "Lectus pellentesque senectus elit donec massa ipsum ultricies dui. Bibendum et enim fringilla tincidunt ligula non, condimentum nunc.",
+            "Lectus pellentesque senectus elit donec massa ipsum ultricies dui.",
+        videoUrl: "https://www.youtube.com/embed/J-_KSiyfWY4",
     },
     {
         id: 2,
         title: "Tabiiy lateks",
         image: tech2Img,
         description:
-            "Aliquam euismod ornare justo, sed faucibus eu. Sed amet tellus netus quis bibendum. Euismod diam eu sem tristique aenean rhoncus.",
+            "Aliquam euismod ornare justo, sed faucibus eu. Sed amet tellus netus.",
+        videoUrl: "https://www.youtube.com/embed/MM_VYM_qqTU",
     },
     {
         id: 3,
         title: "Mustaqil prujina",
         image: tech3Img,
         description:
-            "Enim urna consequat, justo, cras tincidunt imperdiet orci sodales. Dui purus feugiat morbi quam orci, vel. Elementum tincidunt blandit ultricies venenatis rhoncus.",
+            "Enim urna consequat, justo, cras tincidunt imperdiet orci sodales.",
+        videoUrl: "https://www.youtube.com/embed/tLIABBsDMWI",
     },
 ];
 
-// --- О компании: Ряд 1 (Текст + Видео) / Biz haqimizda: 1-qator (Matn + Video) ---
 export const aboutRowOne: AboutRowOneItem = {
     title: "Dream Cloud kompaniyasi haqida",
     description:
-        "Penatibvs viverra gravida rhoncvs in. At tvrpis morbi ante tortor a est. Habitant adipiscing vt sed pvlvinvar tellvs, vt vrna, fermentvm:",
+        "Penatibvs viverra gravida rhoncvs in. At tvrpis morbi ante tortor a est.",
     image: aboutVideoImg,
+    video: "https://www.youtube.com/watch?v=ZmbBOiwj5_A",
     features: [
         "Penatibvs viverra gravida rhoncvs in.",
         "Dolor integer in interdum viverra risvs dolor enim.",
@@ -280,7 +354,6 @@ export const aboutRowOne: AboutRowOneItem = {
     ],
 };
 
-// --- О компании: Ряд 2 (Фото шоурума + Текст) / Biz haqimizda: 2-qator (Showroom rasmi + Matn) ---
 export const aboutRowTwo: AboutRowTwoItem = {
     descriptionTop:
         "Libero erat praesent ullamcorper eget tortor sed et. Nec id lobortis gravida vitae. Scelerisque id fusce vitae ut. Integer sed vulputate sed nec. Arcu id mattis erat et id.",
@@ -292,10 +365,9 @@ export const aboutRowTwo: AboutRowTwoItem = {
         "Facilisi mauris condimentum sagittis odio rhoncus semper.",
     ],
     descriptionBottom:
-        "Ac tortor volutpat pellentesque mauris nisi, praesent. Et tempus accumsan est elementum feugiat arcu mauris tincidunt. Eget faucibus pharetra et luctus eget ut fames. A cursus elementum egestas eu scelerisque id.",
+        "Ac tortor volutpat pellentesque mauris nisi, praesent. Et tempus accumsan est elementum feugiat.",
 };
 
-// --- Блок преимуществ / Afzalliklar bloki ---
 export const advCards: AdvCardItem[] = [
     {
         image: advImg1,
@@ -306,33 +378,51 @@ export const advCards: AdvCardItem[] = [
     {
         image: advImg2,
         title: "Qo'llab-quvvatlash",
-        desc: "Bizning qo'llab-quvvatlash xizmati sizga har qanday savolda yordam beradi va menejerlarning",
+        desc: "Bizning qo'llab-quvvatlash xizmati sizga har qanday savolda yordam beradi",
         phone: "+998 97 144-24-42",
         isVideo: false,
     },
     {
         image: advImg3,
         title: "Kafolat",
-        desc: "Biz matraslarimiz uchun 8 yilgacha kafolat beramiz. Agar matras kamida 25 mm qisqartirilsa.",
+        desc: "Biz matraslarimiz uchun 8 yilgacha kafolat beramiz.",
         isVideo: false,
     },
 ];
 
-// --- Блок локации (Адрес) / Manzilimiz bloki (Lokatsiya) ---
-export const addData: AddDataItem = {
-    title: "Manzilimiz",
-    address: "Toshkent, Parkent ko'chasi, 176-uy",
-    landmark:
-        "Mo'ljal: Qoraqamish 2/1, Tursunxodjayeva ro'parasi, Milliy bog' metro bekati.",
-    buttonText: "Geolokatsiya",
-    image: addImg,
-    locationUrl: "https://maps.google.com",
-    progressSteps: [1, 2, 3, 4], // Декоративная линия под фото / Rasm ostidagi dekorativ chiziq segmentlari
-    activeStep: 0, // Индекс активного сегмента / Aktiv segment indeksi
-};
+export const addressesData: SingleAddressItem[] = [
+    {
+        id: 1,
+        title: "Manzilimiz",
+        address: "Toshkent, Parkent ko'chasi, 176-uy",
+        landmark:
+            "Mo'ljal: Qoraqamish 2/1, Tursunxodjayeva ro'parasi, Milliy bog' metro bekati.",
+        buttonText: "Geolokatsiya",
+        image: addImg,
+        locationUrl: "https://maps.google.com",
+    },
+    {
+        id: 2,
+        title: "Chilonzor filiali",
+        address: "Toshkent, Chilonzor ko'chasi, 24-uy",
+        landmark: "Mo'ljal: Chilonzor metro bekati, Qatortol bozori yaqinida.",
+        buttonText: "Geolokatsiya",
+        image: addImg2,
+        locationUrl: "http://googleusercontent.com/maps.google.com/2",
+    },
+    {
+        id: 3,
+        title: "Yunusobod filiali",
+        address: "Toshkent, Amir Temur ko'chasi, 95-uy",
+        landmark:
+            "Mo'ljal: Shahriston metro bekati, Megaplanet savdo markazi ro'parasi.",
+        buttonText: "Geolokatsiya",
+        image: addImg3,
+        locationUrl: "http://googleusercontent.com/maps.google.com/3",
+    },
+];
 
-// --- Форма обратной связи / Qayta aloqa formasi ---
-export const infoData: InfoDataItem = {
+export const infoData: InfoData = {
     title: "Sizni qiziqtirdimi?",
     subtitle: "Raqamingizni qoldiring, biz sizga yana qo'ng'iroq qilamiz",
     countryCode: "+998",
@@ -340,13 +430,12 @@ export const infoData: InfoDataItem = {
     buttonText: "Yuborish",
 };
 
-// --- Подвал сайта / Sayt futili (Footer) ---
-export const footerData: FooterDataItem = {
+export const footerData: FooterData = {
     links: [
         { text: "Biz haqimizda", url: "#about" },
-        { text: "Katalog", url: "#catalog" },
-        { text: "Aksiya", url: "#promo" },
-        { text: "Manzilimiz", url: "#add" },
+        { text: "Katalog", url: "#products" },
+        { text: "Aksiya", url: "#discount" },
+        { text: "Manzilimiz", url: "#location" },
     ],
     socials: [
         { name: "facebook", url: "https://facebook.com" },
@@ -354,5 +443,22 @@ export const footerData: FooterDataItem = {
         { name: "vimeo", url: "https://vimeo.com" },
         { name: "youtube", url: "https://youtube.com" },
     ],
-    copyright: "© 2021 Dream Cloud. Barcha huquqlar himoyalangan.",
+    copyright: "© 2026 Dream Cloud. Barcha huquqlar himoyalangan.",
+};
+
+export const orderModalContent: OrderModalData = {
+    title: "Buyurtma qilish",
+    namePlaceholder: "Ismingizni yozing",
+    phonePrefix: "+998",
+    phonePlaceholder: "Raqamingizni yozing",
+    categoryLabel: "Mahsulotlarni toifasini tanlang",
+    quantityLabel: "Miqdorni tanlang",
+    submitButtonText: "Yuborish",
+};
+
+export const successModalContent: SuccessModalData = {
+    title: "Arizangiz muvaffaqiyatli yuborildi",
+    image: group3660Img,
+    description: "Tez orada operatorlarimiz siz bilan bog'lanishadi",
+    closeButtonText: "Ok",
 };

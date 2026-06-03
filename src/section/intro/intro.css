@@ -1,65 +1,163 @@
+/* intro.css */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 .intro {
+    background-color: #EABF9F;
+    padding: 80px 0;
     width: 100%;
-    background-color: #F3C3A4;
-    padding: 60px 0 80px 0;
+    box-sizing: border-box;
     overflow: hidden;
 }
 
 .intro__container {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 40px;
+    justify-content: space-between;
+    height: 380px;
 }
 
+/* Левая текстовая часть */
 .intro__content {
-    max-width: 550px;
+    flex: 0 1 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Заголовок */
+.intro__title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 54px;
+    font-weight: 800;
+    color: #002c42;
+    line-height: 1.15;
+    margin: 0;
+    min-height: 125px;
+}
+
+/* Блок управления */
+.intro__controls {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 50px;
 }
 
-.intro__title {
-    font-size: 56px;
-    font-weight: 800;
-    color: #002C47;
-    line-height: 1.15;
-    margin: 0 0 40px 0;
+.intro__button-link {
+    text-decoration: none;
+    margin-bottom: 100px;
 }
 
-.intro__content button {
+/* Кнопка */
+.intro__button {
     background-color: #ffffff;
-    border: 1.5px solid #002C47;
-    color: #002C47;
-    padding: 12px 28px;
-    border-radius: 4px;
+    color: #002c42;
+    border: 1.5px solid #002c42;
+    border-radius: 6px;
+    padding: 14px 25px;
+    font-family: inherit;
+    font-size: 16px;
     font-weight: 600;
-    font-size: 15px;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.intro__content button:hover {
-    background-color: #002C47;
+.intro__button:hover {
+    background-color: #002c42;
     color: #ffffff;
 }
 
-.intro__image {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
+.intro__button::after {
+    content: '→';
+    font-size: 18px;
+    line-height: 1;
 }
 
-.intro__image img {
-    max-width: 100%;
-    height: auto;
+/* Линия пагинации */
+.intro__pagination {
+    display: flex;
+    width: 220px;
+    height: 3px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.intro__pagination-dot {
+    flex: 1;
+    height: 100%;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.intro__pagination-dot.active {
+    background-color: #002c42;
+}
+
+/* Правая часть */
+.intro__image {
+    flex: 0 0 600px;
+    height: 350px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+.intro__main-img {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
+    display: block;
+    position: relative;
+    top: 20px;
+    transition: transform 0.1s ease;
+}
+
+.intro__image:active .intro__main-img {
+    transform: scale(0.97);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 992px) {
+    .intro__container {
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+    }
+
+    .intro__content {
+        align-items: center;
+        flex: 1 1 auto;
+        margin-bottom: 40px;
+    }
+
+    .intro__controls {
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .intro__button-link {
+        margin-bottom: 40px;
+    }
+
+    .intro__image {
+        flex: 0 0 auto;
+        height: 250px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .intro__main-img {
+        top: 0;
+    }
 }
