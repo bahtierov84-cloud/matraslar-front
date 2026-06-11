@@ -34,7 +34,7 @@ const Product: React.FC<ProductProps> = ({ onOrderClick }) => {
         setChosenProductTitle(product.title);
         setSelectedCategory(categoryObj ? categoryObj.name : "");
         setIsOrderModalOpen(true);
-        
+
         // Вызываем переданный проп
         onOrderClick();
     };
@@ -70,7 +70,7 @@ const Product: React.FC<ProductProps> = ({ onOrderClick }) => {
     };
 
     const openImageModal = (product: (typeof productsData)[0]) => {
-        setActiveModalImg(product.image); 
+        setActiveModalImg(product.image);
         setIsImageModalOpen(true);
     };
 
@@ -118,11 +118,29 @@ const Product: React.FC<ProductProps> = ({ onOrderClick }) => {
                                     className='product-card__zoom-btn'
                                     onClick={() => openImageModal(product)}
                                     type='button'>
-                                    <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2.5'>
+                                    <svg
+                                        width='20'
+                                        height='20'
+                                        viewBox='0 0 24 24'
+                                        fill='none'
+                                        stroke='currentColor'
+                                        strokeWidth='2.5'>
                                         <circle cx='11' cy='11' r='8'></circle>
-                                        <line x1='21' y1='21' x2='16.65' y2='16.65'></line>
-                                        <line x1='11' y1='8' x2='11' y2='14'></line>
-                                        <line x1='8' y1='11' x2='14' y2='11'></line>
+                                        <line
+                                            x1='21'
+                                            y1='21'
+                                            x2='16.65'
+                                            y2='16.65'></line>
+                                        <line
+                                            x1='11'
+                                            y1='8'
+                                            x2='11'
+                                            y2='14'></line>
+                                        <line
+                                            x1='8'
+                                            y1='11'
+                                            x2='14'
+                                            y2='11'></line>
                                     </svg>
                                 </button>
 
@@ -149,9 +167,15 @@ const Product: React.FC<ProductProps> = ({ onOrderClick }) => {
                                                         {spec.label}
                                                     </span>
                                                     <span className='product-card__spec-value'>
-                                                        {spec.value.split(" ")[0]}
+                                                        {
+                                                            spec.value.split(
+                                                                " ",
+                                                            )[0]
+                                                        }
                                                         <span className='product-card__spec-unit'>
-                                                            {spec.value.split(" ")[1] || ""}
+                                                            {spec.value.split(
+                                                                " ",
+                                                            )[1] || ""}
                                                         </span>
                                                     </span>
                                                 </div>
@@ -164,7 +188,9 @@ const Product: React.FC<ProductProps> = ({ onOrderClick }) => {
                                 </p>
 
                                 <div className='product-card__price-block'>
-                                    <span className='product-card__price-label'>Narxi</span>
+                                    <span className='product-card__price-label'>
+                                        Narxi
+                                    </span>
                                     <div className='product-card__price-wrap'>
                                         {product.oldPrice && (
                                             <span className='product-card__price-old'>
@@ -179,10 +205,18 @@ const Product: React.FC<ProductProps> = ({ onOrderClick }) => {
 
                                 <button
                                     className='product-card__btn'
-                                    onClick={() => handleOpenOrderModal(product)}
+                                    onClick={() =>
+                                        handleOpenOrderModal(product)
+                                    }
                                     type='button'>
                                     Buyurtma berish
-                                    <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2'>
+                                    <svg
+                                        width='16'
+                                        height='16'
+                                        viewBox='0 0 24 24'
+                                        fill='none'
+                                        stroke='currentColor'
+                                        strokeWidth='2'>
                                         <circle cx='9' cy='21' r='1'></circle>
                                         <circle cx='20' cy='21' r='1'></circle>
                                         <path d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6'></path>
@@ -195,11 +229,24 @@ const Product: React.FC<ProductProps> = ({ onOrderClick }) => {
             </div>
 
             {isImageModalOpen && (
-                <div className='product-modal' onClick={() => setIsImageModalOpen(false)}>
-                    <div className='product-modal__content' onClick={(e) => e.stopPropagation()}>
-                        <button className='product-modal__close' onClick={() => setIsImageModalOpen(false)} type='button'>&times;</button>
+                <div
+                    className='product-modal'
+                    onClick={() => setIsImageModalOpen(false)}>
+                    <div
+                        className='product-modal__content'
+                        onClick={(e) => e.stopPropagation()}>
+                        <button
+                            className='product-modal__close'
+                            onClick={() => setIsImageModalOpen(false)}
+                            type='button'>
+                            &times;
+                        </button>
                         <div className='product-modal__main-img-wrap'>
-                            <img src={activeModalImg} alt='Matras Gallereya' className='product-modal__main-img' />
+                            <img
+                                src={activeModalImg}
+                                alt='Matras Gallereya'
+                                className='product-modal__main-img'
+                            />
                         </div>
                         <div className='product-modal__thumbnails'>
                             {modalGallery.map((img, index) => (

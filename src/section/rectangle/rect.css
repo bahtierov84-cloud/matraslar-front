@@ -22,34 +22,40 @@
     gap: 60px;
 }
 
-/* Второй ряд переворачиваем: картинка слева, текст справа */
+/* Для ПК: меняем порядок медиа во втором ряду */
+.about__row--reverse .about__col-text {
+    order: 2;
+}
 
+.about__row--reverse .about__col-media {
+    order: 1;
+}
 
 .about__col-text,
 .about__col-media {
     flex: 1;
 }
 
-/* Оптимизированный видео-враппер */
-.about__video-wrapper {
+/* Медиа-блоки */
+.about__video-wrapper,
+.about__image-wrapper {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
-    /* Стабильные пропорции */
     border-radius: 12px;
     overflow: hidden;
     background-color: #000000;
 }
 
 .about__video-wrapper iframe,
-.about__video-wrapper .about__img {
+.about__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
-/* Кнопка Play */
+/* Кнопки */
 .about__play-btn {
     position: absolute;
     top: 50%;
@@ -65,22 +71,10 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(0, 44, 71, 0.4);
     z-index: 2;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    transition: 0.2s;
 }
 
-.about__play-btn svg {
-    margin-left: 4px;
-    /* Оптическое центрирование иконки плеера */
-}
-
-.about__play-btn:hover {
-    background-color: #001F33;
-    transform: translate(-50%, -50%) scale(1.1);
-}
-
-/* Новые стили для кнопки Закрыть инлайн-видео */
 .about__close-btn {
     position: absolute;
     top: 15px;
@@ -93,119 +87,120 @@
     border-radius: 50%;
     cursor: pointer;
     font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     z-index: 10;
-    transition: background 0.2s;
-    line-height: 1;
 }
 
-.about__close-btn:hover {
-    background: rgba(0, 0, 0, 0.9);
-}
-
-/* Стили для картинок во втором ряду */
-.about__image-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 625 / 401;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.about__image-wrapper .about__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Стили для заголовков */
-.about h1,
+/* Типографика */
 .about__title {
     font-family: 'Raleway', sans-serif;
     font-size: 44px;
     font-weight: 900;
     color: #002C47;
     margin: 0 0 20px 0;
-    letter-spacing: -0.5px;
-    line-height: 1.2;
 }
 
-/* Стили для текста */
-.about p {
+.about__lead {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     line-height: 1.8;
     color: #4A4A4A;
-    margin: 0 0 20px 0;
 }
 
 /* Списки */
 .about__list,
 .about__ordered-list {
     margin: 0 0 20px 0;
-    padding-left: 20px;
     background-color: #EABF9F;
     border-radius: 10px;
-    padding: 27px 30px 28px;
+    padding: 27px 30px 28px 40px;
     border: 2px solid #01384D;
 }
 
 .about__list li {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
-    color: #4A4A4A;
-
-    margin-bottom: 12px;
-    position: relative;
     list-style-type: disc;
+    margin-bottom: 12px;
 }
 
 .about__ordered-list {
     list-style-type: decimal;
-    /* Включает стандартную нумерацию */
 }
 
 .about__ordered-list li {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
     color: #002C47;
-    /* Цвет для маркеров-цифр */
     font-weight: 700;
-    /* Жирные цифры */
     margin-bottom: 12px;
+}
+
+.about__list li {
+    color: #4A4A4A;
+    font-weight: 400;
 }
 
 .about__ordered-list li span {
     color: #4A4A4A;
     font-weight: 400;
-    /* Обычный вес для текста внутри пункта */
 }
 
-/* ==========================================================================
-   Адаптивность под планшеты и мобильные устройства
-   ========================================================================== */
+/* АДАПТИВНОСТЬ */
 @media (max-width: 992px) {
     .about {
-        padding: 60px 0;
+        padding: 40px 0;
     }
 
     .about__container {
-        gap: 50px;
+        gap: 30px;
+        /* Уменьшаем расстояние между секциями */
     }
 
     .about__row,
     .about__row--reverse {
         flex-direction: column;
-        gap: 30px;
+        /* Всегда вертикально */
+        gap: 20px;
+        /* Отступ между текстом и медиа */
     }
 
-    .about h1,
+    /* Убираем order, чтобы контент следовал строго по порядку HTML */
+    .about__row--reverse .about__col-text,
+    .about__row--reverse .about__col-media {
+        order: unset;
+    }
+
+    .about__col-text,
+    .about__col-media {
+        width: 100%;
+    }
+
     .about__title {
-        font-size: 32px;
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 690px) {
+    .about__title {
+        font-size: 24px;
+    }
+
+    .about__list,
+    .about__ordered-list {
+        padding: 15px;
+        /* Компактные списки как на фото */
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 325px) {
+    .about__title {
+        font-size: 20px;
+    }
+
+    .about__lead {
+        font-size: 13px;
+    }
+
+    .about__play-btn {
+        width: 40px;
+        height: 40px;
     }
 }

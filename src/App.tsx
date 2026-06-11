@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Nav from "./section/nav/nav";
-import Header from "./section/header/header"; 
-import Intro from "./section/intro/intro"; 
+import Header from "./section/header/header";
+import Intro from "./section/intro/intro";
 import Stats from "./section/stats/stats";
 import Product from "./section/products/product";
 import Discount from "./section/discount/discount";
@@ -17,7 +17,8 @@ import "./App.css";
 const App: React.FC = () => {
     // Состояния для модального окна Хедера
     const [isHeaderModalOpen, setIsHeaderModalOpen] = useState<boolean>(false);
-    const [isHeaderOrderSuccess, setIsHeaderOrderSuccess] = useState<boolean>(false);
+    const [isHeaderOrderSuccess, setIsHeaderOrderSuccess] =
+        useState<boolean>(false);
     const [customerName, setCustomerName] = useState<string>("");
     const [customerPhone, setCustomerPhone] = useState<string>("");
 
@@ -36,14 +37,14 @@ const App: React.FC = () => {
 
     const handleHeaderOrderSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (customerName.trim().length < 2) return; 
+        if (customerName.trim().length < 2) return;
 
         console.log("Muvaffaqiyatli umumiy buyurtma (Header):", {
             customerName,
             customerPhone: `+998 ${customerPhone}`,
             productTitle: "Umumiy konsultatsiya / Matraslar.uz",
         });
-        
+
         setIsHeaderOrderSuccess(true);
     };
 
@@ -53,6 +54,7 @@ const App: React.FC = () => {
             <Nav />
             <Header />
             <Intro />
+
             <Stats />
 
             {/* Исправленный вызов: просто передаем ссылку на функцию */}
@@ -68,7 +70,7 @@ const App: React.FC = () => {
 
             {/* Модальное окно для Хедера */}
             {isHeaderModalOpen && (
-                <OrderModal 
+                <OrderModal
                     isOpen={isHeaderModalOpen}
                     isSuccess={isHeaderOrderSuccess}
                     onClose={closeHeaderModal}
@@ -77,10 +79,10 @@ const App: React.FC = () => {
                     setCustomerName={setCustomerName}
                     customerPhone={customerPhone}
                     setCustomerPhone={setCustomerPhone}
-                    selectedCategory=""
-                    setSelectedCategory={() => {}} 
+                    selectedCategory=''
+                    setSelectedCategory={() => {}}
                     quantity={1}
-                    onIncrement={() => {}} 
+                    onIncrement={() => {}}
                     onDecrement={() => {}}
                 />
             )}

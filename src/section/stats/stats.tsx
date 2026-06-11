@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./stats.css";
+// 1. Импортируем данные (убедитесь, что экспорт в data.ts называется statsData или подобным)
 import { statsData } from "../../assets/data";
 
 interface AnimatedCounterProps {
@@ -7,16 +8,19 @@ interface AnimatedCounterProps {
     duration?: number;
 }
 
-const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ target, duration = 2000 }) => {
+const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
+    target,
+    duration = 2000,
+}) => {
     const [count, setCount] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const ref = useRef<HTMLSpanElement>(null);
-    
-    const hasPlus = target.includes("+");
-    const hasK = target.toLowerCase().includes("k");
-    const numericTarget = parseInt(target.replace(/[^\d]/g, ""), 10);
 
-    // Intersection Observer для запуска анимации при скролле
+    const numericTarget =
+        parseInt((target || "").replace(/[^\d]/g, ""), 10) || 0;
+    const hasPlus = (target || "").includes("+");
+    const hasK = (target || "").toLowerCase().includes("k");
+
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -25,14 +29,13 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ target, duration = 20
                     observer.disconnect();
                 }
             },
-            { threshold: 0.1 }
+            { threshold: 0.1 },
         );
 
         if (ref.current) observer.observe(ref.current);
         return () => observer.disconnect();
     }, []);
 
-    // Сама анимация счета
     useEffect(() => {
         if (!isVisible) return;
 
@@ -63,20 +66,22 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ target, duration = 20
 };
 
 const Stats: React.FC = () => {
+    // Просто используем импортированные данные напрямую
+    const stats = statsData; 
+
     return (
         <section className='stats'>
             <div className='stats__container container'>
-                {statsData.map((item) => (
+                {stats.map((item) => (
                     <div key={item.id} className='stats__item'>
                         <div className='stats__value'>
-                            <AnimatedCounter target={item.value} />
+                            <AnimatedCounter target={item.value || "0"} />
                         </div>
-                        <p className='stats__label'>{item.label}</p>
+                        <p className='stats__label'>{item.label || "Нет данных"}</p>
                     </div>
                 ))}
             </div>
         </section>
     );
 };
-
 export default Stats;

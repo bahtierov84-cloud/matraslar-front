@@ -1,39 +1,177 @@
-/* ==========================================================================
-   Навигационная панель (Меню)
-   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&display=swap');
 
-/* Контейнер навигации: задает цвет фона и вертикальное выравнивание */
-.menu-nav {
-    background-color: #EABF9F; /* Фирменный цвет фона */
-    padding: 10px 0;          /* Отступы сверху и снизу */
-    display: flex;
-    align-items: center;      /* Центрирование элементов по вертикали */
+:root {
+    --main-font: 'Josefin Sans', sans-serif;
+    --bg-color: #EABF9F;
+    --text-color: #002C47;
 }
 
-/* Обертка списка: ограничивает ширину и центрирует меню на странице */
+* {
+    box-sizing: border-box;
+}
+
+/* ДЕСКТОП */
+.menu-nav {
+    background-color: var(--bg-color);
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
 .menu-list {
     max-width: 1200px;
     width: 100%;
-    margin: 0 auto;           /* Центрирование контейнера */
-    padding: 0 20px;          /* Безопасные отступы по бокам */
-    box-sizing: border-box;   /* Учет паддингов в общей ширине */
+    margin: 0 auto;
+    padding: 0 20px;
     display: flex;
-    justify-content: flex-end; /* Прижимает пункты меню к правому краю */
-    gap: 25px;                 /* Расстояние между пунктами меню */
-    list-style: none;         /* Убирает стандартные маркеры списка */
+    justify-content: flex-end;
+    gap: 25px;
+    list-style: none;
 }
 
-/* Ссылки меню: базовое оформление и состояние при наведении */
 .menu-link {
-    text-decoration: none;    /* Убирает подчеркивание */
-    color: #4A4A4A;           /* Цвет текста */
+    text-decoration: none;
+    color: #4A4A4A;
     font-size: 14px;
     font-weight: 500;
-    white-space: nowrap;      /* Запрещает перенос слов внутри пунктов */
-    transition: color 0.2s ease; /* Плавность изменения цвета */
+    transition: color 0.2s;
 }
 
-/* Эффект интерактивности при наведении */
 .menu-link:hover {
-    color: #002C47;           /* Акцентный цвет при наведении */
+    color: var(--text-color);
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+/* МОБИЛЬНОЕ МЕНЮ */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.mobile-menu.active {
+    display: flex;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    align-items: center;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.menu-content {
+    padding: 0 20px;
+}
+
+.mobile-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav-list li {
+    margin-bottom: 15px;
+}
+
+.mobile-nav-list a {
+    font-family: var(--main-font);
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    transition: opacity 0.3s ease;
+}
+
+/* Эффект наведения */
+.mobile-nav-list a:hover {
+    opacity: 0.6;
+}
+
+.order-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: 2px solid var(--text-color);
+    background: transparent;
+    color: var(--text-color);
+    font-weight: 600;
+    font-family: var(--main-font);
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 250px;
+    transition: all 0.3s ease;
+}
+
+.order-btn:hover {
+    background-color: var(--text-color);
+    color: #fff;
+}
+
+/* ФУТЕР ПРИЖАТ К НИЗУ */
+.menu-footer-phone {
+    background-color: #FFFFFF;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 18px;
+    color: var(--text-color);
+    font-weight: 600;
+    
+    /* ЭТО ПРИЖИМАЕТ ФУТЕР К НИЗУ */
+}
+
+/* --- АДАПТАЦИЯ --- */
+@media (max-width: 690px) {
+    .menu-list {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        margin-right: 20px;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 580px) {
+    .mobile-nav-list a {
+        font-size: 22px;
+    }
+
+    .order-btn {
+        font-size: 16px;
+        padding: 8px 15px;
+    }
+}
+
+@media (min-width: 691px) {
+    .mobile-menu {
+        display: none !important;
+    }
 }

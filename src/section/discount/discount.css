@@ -199,18 +199,55 @@
 }
 
 /* Адаптивность */
-@media (max-width: 768px) {
+/* ==========================================================================
+   АДАПТИВНОСТЬ СЕКЦИИ DISCOUNT
+   ========================================================================== */
+
+/* Планшет: 690px */
+@media (max-width: 690px) {
+    .discount {
+        padding: 40px 0;
+    }
+
     .discount-card {
         flex-direction: column;
+        /* Перенос фото над контентом */
         gap: 20px;
+        padding: 20px;
     }
-    
+
     .discount-card__left {
-        flex: 0 0 100%;
+        flex: 0 0 auto;
+        width: 100%;
     }
-    
+
     .discount-card__specs {
-        flex-wrap: wrap;
         gap: 20px;
+        /* Уменьшаем отступы между характеристиками */
+    }
+}
+
+/* Телефон: 325px */
+@media (max-width: 325px) {
+    .discount__title {
+        font-size: 28px;
+    }
+
+    .discount-card__title {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .discount-card__specs {
+        display: grid;
+        /* Переводим характеристики в сетку 2x2 */
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .discount-card__btn {
+        width: 100%;
+        /* Кнопка на всю ширину экрана */
+        justify-content: center;
     }
 }

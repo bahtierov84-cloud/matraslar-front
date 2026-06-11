@@ -7,8 +7,6 @@
     padding: 60px 0;
 }
 
-
-
 .product__content {
     margin-bottom: 30px;
     text-align: left;
@@ -271,7 +269,7 @@
 }
 
 /* ==========================================================================
-   4. Стили для Галереи (Локальное модальное окно лупы)
+   4. Стили для Галереи
    ========================================================================== */
 .product-modal {
     position: fixed;
@@ -280,13 +278,11 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 44, 71, 0.3);
-    /* Исправлено: добавлен затемняющий фон, чтобы работал blur */
     backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    /* Выставили максимальный приоритет слоя */
 }
 
 .product-modal__content {
@@ -372,13 +368,9 @@
     transform: scale(1.02);
 }
 
-/* ... Предыдущие стили без изменений ... */
-
-/* Улучшение: Защита flex-контейнера от растягивания */
 .product-card__right {
     flex: 1;
     min-width: 0;
-    /* ОЧЕНЬ ВАЖНО: предотвращает выход текста за пределы */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -387,44 +379,39 @@
 /* ==========================================================================
    АДАПТИВНОСТЬ (Дополнения)
    ========================================================================== */
-@media (max-width: 992px) {
+
+/* Планшет: 690px */
+@media (max-width: 690px) {
     .product-card {
         flex-direction: column;
-        gap: 20px;
     }
 
     .product-card__left {
         flex: 0 0 auto;
         width: 100%;
     }
-}
-
-@media (max-width: 576px) {
-    .product-card {
-        padding: 20px;
-    }
-
-    .product-card__title {
-        font-size: 22px;
-    }
 
     .product-card__specs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 20px;
     }
 }
 
-/* ==========================================================================
-   Микро-оптимизации UX
-   ========================================================================== */
-.categories__item,
-.product-card__btn,
-.product-modal__close {
-    user-select: none;
-    /* Текст не будет выделяться при случайных двойных кликах */
-}
+/* Телефон: 325px */
+@media (max-width: 325px) {
+    .product-card__title {
+        font-size: 20px;
+    }
 
-/* Плавный скролл для мобильных табов */
-.categories__list {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    .product-card__btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .product-card__zoom-btn {
+        top: auto;
+        bottom: 10px;
+        right: 10px;
+    }
 }

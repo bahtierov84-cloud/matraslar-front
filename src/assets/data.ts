@@ -42,7 +42,7 @@ export interface MenuItem {
 }
 
 export const Logo = LogoImg;
-
+export { LogoImg };
 export interface TelItem {
     id: number;
     number: string;

@@ -1,27 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "./nav.css";
-import { menuItems } from "../../assets/data";
+// Импортируем данные и логотип из вашего файла data.ts
+import { menuItems, LogoImg } from "../../assets/data";
 
 const Nav: React.FC = () => {
+    const [isOpen, setIsOpen] = useState(false);
 
-    /**
-     * Обработчик плавной прокрутки к якорям
-     * @param e - событие клика
-     * @param link - значение href ссылки (например, "#products")
-     */
-    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, link: string) => {
-        // Проверяем, что ссылка ведет на внутренний якорь
+    const handleScroll = (
+        e: React.MouseEvent<HTMLAnchorElement>,
+        link: string,
+    ) => {
+        setIsOpen(false);
+
         if (link.startsWith("#")) {
-            e.preventDefault(); // Отменяем стандартный резкий скачок браузера
-
+            e.preventDefault();
             const targetId = link.replace("#", "");
             const targetElement = document.getElementById(targetId);
 
             if (targetElement) {
-                // Выполняем плавную прокрутку
                 targetElement.scrollIntoView({
-                    behavior: "smooth", // Анимированная прокрутка
-                    block: "start",      // Выравнивание секции по верхнему краю экрана
+                    behavior: "smooth",
+                    block: "start",
                 });
             }
         }
@@ -29,19 +28,55 @@ const Nav: React.FC = () => {
 
     return (
         <nav className='menu-nav'>
-            <ul className='menu-list'>
+            <button className='menu-toggle' onClick={() => setIsOpen(!isOpen)}>
+                {isOpen ? "✕" : "☰"}
+            </button>
+
+            <ul className={`menu-list ${isOpen ? "active" : ""}`}>
                 {menuItems.map((item) => (
                     <li key={item.id}>
-                        <a 
-                            href={item.link} 
+                        <a
+                            href={item.link}
                             className='menu-link'
-                            onClick={(e) => handleScroll(e, item.link)}
-                        >
+                            onClick={(e) => handleScroll(e, item.link)}>
                             {item.title}
                         </a>
                     </li>
                 ))}
             </ul>
+
+            <div className={`mobile-menu ${isOpen ? "active" : ""}`}>
+                <div className='menu-header'>
+                    <img src={LogoImg} alt='Dream Cloud' />
+
+                    {/* Отображение текущей даты */}
+
+                    <button onClick={() => setIsOpen(false)}>✕</button>
+                </div>
+
+                <div className='menu-content'>
+                    <ul className='mobile-nav-list'>
+                        {menuItems.map((item) => (
+                            <li key={item.id}>
+                                <a
+                                    href={item.link}
+                                    onClick={(e) => handleScroll(e, item.link)}>
+                                    {item.title}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div className='menu-footer-phone'>
+                    <span>📞</span>
+                    <a
+                        href='tel:+998901234567'
+                        style={{ textDecoration: "none", color: "inherit" }}>
+                        +998 90 123 45 67
+                    </a>
+                </div>
+            </div>
         </nav>
     );
 };
